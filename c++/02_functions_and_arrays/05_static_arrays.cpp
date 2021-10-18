@@ -1,17 +1,28 @@
 #include <iostream>
 
-void surprise(double a[], const std::size_t n) {
+//c++ passes by value by default
+//what about array? => we pass a pointer
+//realtion between pointer and array
+//a[n] is equal to *(a+n)
+void surprise(double a[], const std::size_t n) { //size_t alias for long long unsigned int
   for (auto i = 0llu; i < n; ++i) {
     a[i] = 77;
   }
 }
 
+//array a collection of elements with same type (homogenous)
+//static array => is placed in stack and doesn't change its size
+
+//stack is a small part of ram... => don't allocate very big array
+//=> aloccate them in heap (must not be static)
+
+//pay attention: the compiler doesn't follow the c++ standard => TODO
 int main() {
   int ai[4];
   float af[9];
   ai[0] = 9;    // first element
   af[8] = 3.3;  // last element
-  ai[88] = 7;   // undefined behavior, no range checking
+  ai[88] = 7;   // undefined behavior, no range checking!!!
 
   for (std::size_t k{0}; k < 4; ++k)
     std::cout << "ai[" << k << "] = " << ai[k] << '\n';

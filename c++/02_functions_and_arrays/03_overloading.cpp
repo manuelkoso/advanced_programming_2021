@@ -1,5 +1,6 @@
 #include <iostream>
 
+//but i cannot have two function with the same name with differnet return type!!
 // forward declaration
 int dwim(const int a, const int b);
 double dwim(const double a, const double b);

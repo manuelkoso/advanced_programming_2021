@@ -2,6 +2,10 @@
 #include <iostream>
 
 int main() {
+  //c++ is statically typed language
+  //the compiler must know the type of a variable
+  //auto: compiler deduced automatically the type
+  //when use auto don't use {} => use =
   auto b = true;          // a bool
   auto ch = 'x';          // a char
   auto i = 123;           // an int
@@ -15,7 +19,10 @@ int main() {
   for (auto i = 0; i < 7; ++i)
     std::cout << i << std::endl;
 
-  auto pb = &b;  // guess what.. How can I know?
+  auto pb = &b;  // guess what.. How can I know? => pinter boolean
+                //we can use compiler to tell us the type of a variable => inforce a error
+
+  debug(pb);    //TODO
 
   auto s = "hello";  // watch out!
 

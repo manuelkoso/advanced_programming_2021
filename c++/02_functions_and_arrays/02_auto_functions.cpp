@@ -1,5 +1,7 @@
 #include <iostream>
 
+//auto can be also a return type of a function
+//not on parameters
 auto factorial(unsigned int n) {
   unsigned int ret{1};
   while (n > 1) {
