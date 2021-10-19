@@ -2,7 +2,7 @@
 #include <iomanip>  // std::setprecision
 #include <iostream>
 #include <string>
-
+//start
 int main() {
   // built-in types
   int a{-1};  // long long int, unsigned int
@@ -97,7 +97,7 @@ int main() {
 
   int ve{int(ce * a)};  // ok create a variable from constexpr
 
-  // constexpr int  n_ce {ve*8.1234/M_PI}; // error, because a can change 
+  // constexpr int  n_ce {ve*8.1234/M_PI}; // error, because a can change
 
   // cast to void to suppress warning of unused variable
   (void)ve;
