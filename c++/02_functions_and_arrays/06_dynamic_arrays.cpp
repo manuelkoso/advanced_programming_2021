@@ -16,5 +16,6 @@ int main() {
 
   delete[] da;  //we must delete dynamic array!!!
                 //heap is not automatically dealocated (like java with garbage collector)
+                //if we forget => memory leak
   return 0;
 }
