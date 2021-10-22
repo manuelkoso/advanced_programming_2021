@@ -1,5 +1,11 @@
 #include <chrono>
 #include <iostream>
+
+//valgrind to detect memory leaks
+//another method: fsantize library (g++)
+
+//constexpr: function evalueted at compile and run time
+//return types: literals or custom types whose constructor is...
 constexpr std::size_t fib(const unsigned int x) {
   return (x < 2) ? x : fib(x - 1) + fib(x - 2);
   // if (x < 2) return x;
@@ -8,29 +14,35 @@ constexpr std::size_t fib(const unsigned int x) {
   // }
 }
 
-std::size_t fib_rt(const std::size_t x) {
+std::size_t fib_rt(const std::size_t x) { //evalueted in runtime
   if (x < 2)
     return x;
   return fib(x - 1) + fib(x - 2);
 }
 
-template <unsigned i>
+//Meta programming
+template <unsigned i> //only integer types, no doubles, no chars...
 constexpr std::size_t fib_t() {
   return fib_t<i - 1>() + fib_t<i - 2>();
 }
 
-template <>
+//we cannot do fib_t<n>() => no runtime!!
+//this is the differnce with "nomrmal" function
+
+template <>   //base case
 constexpr std::size_t fib_t<0>() {
   return 0;
 }
 
-template <>
+template <>   //base case
 constexpr std::size_t fib_t<1>() {
   return 1;
 }
 
 #if __cplusplus > 201700L
-
+//if is eveliated at runtime
+//=> with constexpr is evalueted at compiletime
+//=> we can add the prevous base cases into the first function fib_t()
 template <unsigned i>
 constexpr std::size_t fib_t17() {
   if constexpr (i < 2)
@@ -46,6 +58,7 @@ constexpr unsigned int num{24};
 int main() {
   {
     auto t0 = std::chrono::high_resolution_clock::now();
+    //without constexpr the function can be evaluted at runtime 
     constexpr auto x = fib(num);
     auto t1 = std::chrono::high_resolution_clock::now();
     auto elapsed =
