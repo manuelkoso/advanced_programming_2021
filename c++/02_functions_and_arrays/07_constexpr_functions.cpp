@@ -39,6 +39,7 @@ constexpr std::size_t fib_t<1>() {
   return 1;
 }
 
+//macros #: add or remove blocks of code at prepocessor
 #if __cplusplus > 201700L
 //if is eveliated at runtime
 //=> with constexpr is evalueted at compiletime
@@ -56,9 +57,9 @@ constexpr std::size_t fib_t17() {
 constexpr unsigned int num{24};
 
 int main() {
-  {
+  { //define a scope
     auto t0 = std::chrono::high_resolution_clock::now();
-    //without constexpr the function can be evaluted at runtime 
+    //without constexpr the function can be evaluted at runtime
     constexpr auto x = fib(num);
     auto t1 = std::chrono::high_resolution_clock::now();
     auto elapsed =
@@ -66,6 +67,8 @@ int main() {
     std::cout << "constexpr: " << x << " [" << elapsed.count() << " us]"
               << std::endl;
   }
+
+  //here I cannot access to t0...
 
   {
     auto t0 = std::chrono::high_resolution_clock::now();
