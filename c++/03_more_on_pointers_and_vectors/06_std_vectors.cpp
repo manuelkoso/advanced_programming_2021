@@ -5,6 +5,10 @@
 // template<class T, class Allocator = std::allocator<T>>
 // class vector;
 
+//std vector is stored in the heap
+//vector can be resized
+//vector => dynamic array 
+
 template <typename T>
 void print_vector(const std::vector<T>& v, const std::string& s);
 

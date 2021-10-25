@@ -4,8 +4,9 @@
 //valgrind to detect memory leaks
 //another method: fsantize library (g++)
 
-//constexpr: function evalueted at compile and run time
+//constexpr: function evalueted at compile and run time (can be evalueted at compile time)
 //return types: literals or custom types whose constructor is...
+//constexpr has limitation, for example we cannot use std::cout
 constexpr std::size_t fib(const unsigned int x) {
   return (x < 2) ? x : fib(x - 1) + fib(x - 2);
   // if (x < 2) return x;
@@ -13,6 +14,8 @@ constexpr std::size_t fib(const unsigned int x) {
   //   return fib(x-1) + fib(x-2);
   // }
 }
+
+//constexpr int  i = 0; //the value of i must be known at compile time 
 
 std::size_t fib_rt(const std::size_t x) { //evalueted in runtime
   if (x < 2)

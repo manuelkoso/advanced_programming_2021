@@ -3,6 +3,9 @@
 template <typename T>
 void print_sentinel(const T* a, const std::size_t l);
 
+//const is a declaration of an intent
+//tell to the compiler to don't change the value
+
 int main() {
   int a{8}, b{7};
   int* pi{&a};
@@ -40,3 +43,7 @@ void print_sentinel(const T* a, const std::size_t l) {
   for (; a != end; ++a)
     std::cout << *a << std::endl;
 }
+
+
+//when we passes const by reference the const is perserved
+//TODO

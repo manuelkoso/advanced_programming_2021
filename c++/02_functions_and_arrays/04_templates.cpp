@@ -1,9 +1,11 @@
 #include <iostream>
 
-//template == clas
+//template are risolved at compile time
+
+//template == class
 //is the evry same
 template <typename T>
-T dwim(const T a, const T b);
+T dwim(const T a, const T b); //There the T is the deduced type
 
 template <typename T, typename S>
 T dwim(const T a, const S b);
@@ -24,7 +26,7 @@ int main() {
             << dwim(g, h) << std::endl;
 
   //auto x = allocate(10);  //doesn't compile, template cannot be deduced by the arguments
-                            //in arguments we haven't got T, only a int varibale 
+                            //in arguments we haven't got T, only a int varibale
   //auto x = allocate<auto>(10); //doesn't compile
   auto x = allocate<int>(10);
   delete [] x;
