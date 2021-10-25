@@ -29,7 +29,7 @@ constexpr std::size_t fib_t() {
 //we cannot do fib_t<n>() => no runtime!!
 //this is the differnce with "nomrmal" function
 
-template <>   //base case
+template <>   //base case, specialized a template function for a given value of the template
 constexpr std::size_t fib_t<0>() {
   return 0;
 }
