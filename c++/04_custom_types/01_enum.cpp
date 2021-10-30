@@ -1,7 +1,8 @@
 #include <iostream>
 
+//enum: generate constants with different values
 enum color { red, yellow, green };
-// enum color{red=0, yellow=1, green=2}; // equivalent
+// enum color{red=0, yellow=1, green=2}; // is equivalent to the prevous statement
 
 void dwim(const color c) {
   switch (c) {
@@ -31,7 +32,7 @@ int main() {
 
   // dwim(2); // error
   dwim(color(2));  // works but why you may want to write this?
-
+                  //don't do it => we are constructing a ne enum
   dwim(color(6));  // ???
 
   return 0;

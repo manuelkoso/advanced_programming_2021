@@ -1,10 +1,11 @@
 #include <iostream>
 
+//to keep space separeted
 namespace choose_a_name {
 
   int variable;
 
-  namespace nested {
+  namespace nested {    //namespace: unnamed scope
 
     void hello1();
     void hello2();

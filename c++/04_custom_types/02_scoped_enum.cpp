@@ -1,5 +1,7 @@
 #include <iostream>
 
+//scoped enum:
+//pretend the nume with the fully qualified name
 enum class color { red, yellow, green };
 // enum class color{red=0, yellow=1, green=2}; // equivalent
 
@@ -24,7 +26,7 @@ int main() {
   color opt{color::red};
   // opt = 3;     // cannot assign int to enum
   // int a = opt; // and they don't implicitly convert to integers
-  int a{static_cast<int>(opt)};  // cast
+  int a{static_cast<int>(opt)};  // cast (use this)
   // int a {int(opt)}; //
   // int a {(int)opt}; // C-style cast
 
