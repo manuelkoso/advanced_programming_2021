@@ -22,7 +22,7 @@ int main() {
   auto pb = &b;  // guess what.. How can I know? => pinter boolean
                 //we can use compiler to tell us the type of a variable => inforce a error
 
-  debug(pb);    //TODO
+  //debug(pb);    //TODO
 
   auto s = "hello";  // watch out!
 
