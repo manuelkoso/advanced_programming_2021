@@ -3,7 +3,7 @@
 
 template <typename T>
 class Vector {
-  std::unique_ptr<T[]> elem;
+  std::unique_ptr<T[]> elem;  //is constructed by passing an address
   std::size_t _size;
 
  public:

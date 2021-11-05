@@ -1,6 +1,7 @@
 #include <algorithm>  // std::copy
 #include <iostream>
 #include <memory>
+//the solution
 
 template <typename T>
 class Vector {

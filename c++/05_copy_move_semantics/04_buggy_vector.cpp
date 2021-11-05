@@ -1,12 +1,14 @@
 #include <iostream>
 
+//why buggy vector? Where is the bug?
+//the bug is where... TODO see lecture
 template <typename T>
 class Vector {
   T* elem;
   std::size_t _size;
 
  public:
-  explicit Vector(const std::size_t length)
+  explicit Vector(const std::size_t length)   //see the explainantion of explicity down
       : elem{new T[length]{}}, _size{length} {}
 
   ~Vector() { delete[] elem; }
@@ -24,11 +26,23 @@ class Vector {
   T* end() { return elem + size(); }
 };
 
+void foo(const Vector<int>& v) {
+  std::cout << v.size() << std::endl;
+}
+
+
 int main() {
   Vector<int> v1{3};
   v1[0] = 1;
   v1[1] = 2;
   v1[2] = 3;
+
+  foo(v1);
+  //foo(1); //why it compiles if we don't use explicit??
+            //because the constructor defines implicity a default foo()
+            //to protect ourself from this bug we have to use explict
+            //explicity calling a Vector
+            //with 1 we are calling the constructor implicity
 
   std::cout << "v1: ";
   for (const auto x : v1)

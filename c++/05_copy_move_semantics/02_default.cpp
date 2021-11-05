@@ -9,6 +9,7 @@ struct S {
 
 int main() {
   S s1;  // calls default constructor
+         //(the string s will be empty and the variable a and b wil be unitailized => random values)
 
   S s2{1, 2.3, "alberto"};  // if there are no custom ctors I can
                             // directly initialize the members. Note
