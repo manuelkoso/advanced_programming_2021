@@ -2,6 +2,26 @@
 #include <iostream>
 #include <memory>
 //the solution
+//the copy semantic must be implemented by yourself
+
+//better implementation of swap with move
+//move has a computation complexity of size_of()
+template <typename T>
+void swap(T& x , T& y) {
+  auto tmp = std::move(y);  //move constructor
+  x = std::move(y);     //move assignment
+  y = std::move(tmp);   //move assignment
+  //prevous swap:
+  //auto tmp = y;  //copy constructor
+  //x = y;        //copy assignment
+  //y = tmp;      //copy assignment
+}
+
+//IMPORTANT
+//if we have a raw pointer it means that default move does a copy by value
+//when we have raw pointer we have to deal with move and copy by hand
+
+//if we have unique pointer the deafult move is fine
 
 template <typename T>
 class Vector {
@@ -43,6 +63,7 @@ class Vector {
 
   /////////////////////////
   // move semantics
+  //steal the resouces => swap that resource with mine
 
   // move ctor
   Vector(Vector&& v) : _size{std::move(v._size)}, elem{std::move(v.elem)} {
@@ -52,10 +73,17 @@ class Vector {
   // Vector(Vector&& v) = default; // ok
 
   // move assignment
+  //call a move to each member
   Vector& operator=(Vector&& v) {
     std::cout << "move assignment\n";
     _size = std::move(v._size);
     elem = std::move(v.elem);
+    //what is the state of v? => undefined
+    //after a move the state of the object is undefined, but must be a valid state
+    //valid state: a state which the destructor can be invoke
+
+    //move access to the underlying structure of the vector, namely the elem and _size
+    //move is very fast, because swap the underlying structure
     return *this;
   }
 
@@ -113,13 +141,24 @@ template <typename T>
 Vector<T> operator+(const Vector<T>& lhs, const Vector<T>& rhs) {
   const auto size = lhs.size();
 
-  // what should we do if vectors have differnt sizes?
+  // what should we do if vectors have differnt sizes? => not now (error handling)
 
   Vector<T> res(size);
   for (std::size_t i = 0; i < size; ++i)
     res[i] = lhs[i] + rhs[i];
 
-  return res;
+  return res;     //I cannot return by reference, the only way is by value
+                  //since c++11 many things passed by value become faster thanks to the move
+
+  //void foo(int& a) => l-value
+  //void foo(int&& a) => r-value
+  //int a = 5;
+  //foo(a); => l-value
+  //foo(3); => r-value
+
+  //r-value are all those variables that don't have a name and are going to die immediately
+  //=> the variable res is going to die immediately
+  //=> is in principle r-value 
 }
 
 template <typename T>

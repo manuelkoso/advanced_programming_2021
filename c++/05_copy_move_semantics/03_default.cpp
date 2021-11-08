@@ -5,7 +5,7 @@ struct X {
   double b;
   char c = 'a';
   X() = default;  // in-class initializers are used by the constructors
-                  // default constructor
+                  // if we want that a default constructor is implemented
 };
 
 struct Y {
@@ -13,7 +13,7 @@ struct Y {
   double b;
   char c = 'a';
   Y() : a{5} {}  // what it is written here wins the in-class initialization
-  Y(const Y&) = delete; //
+  Y(const Y&) = delete; //to explicitly declare the intent of that type/class   
 };
 
 int main() {

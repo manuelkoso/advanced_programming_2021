@@ -1,6 +1,7 @@
 #include <iostream>
 
-enum class flags : unsigned int {
+//enums by default are integers
+enum class flags : unsigned int {   //but we can specified the type there
   flag1 = 1,
   flag2 = 2,
   flag3 = 4,
@@ -15,13 +16,13 @@ enum class flags : unsigned int {
   comb3 = comb1 | flag3,
 };
 
-void do_complicated_stuff(flags flags);
+void do_complicated_stuff(flags flags);   //based on the value of the flag => do something
 
 flags operator|(const flags f1, const flags f2);
 
 unsigned int operator&(const flags f1, const flags f2);
 
-flags& operator|=(flags& f1, const flags f2);
+flags& operator|=(flags& f1, const flags f2); //bit wise or |=
 
 int main() {
   std::cout << "testing flag1 and flag3\n"

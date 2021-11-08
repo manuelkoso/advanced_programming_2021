@@ -1,14 +1,14 @@
 #include <iostream>
 
 //why buggy vector? Where is the bug?
-//the bug is where... TODO see lecture
+//the bug is where I didn't write
 template <typename T>
 class Vector {
   T* elem;
   std::size_t _size;
 
  public:
-  explicit Vector(const std::size_t length)   //see the explainantion of explicity down
+  explicit Vector(const std::size_t length)   //see the explainantion of explicity below
       : elem{new T[length]{}}, _size{length} {}
 
   ~Vector() { delete[] elem; }
@@ -49,7 +49,13 @@ int main() {
     std::cout << x << " ";
   std::cout << std::endl;
 
-  Vector<int> v2{v1};  // default copy constructor
+  Vector<int> v2{v1};  // synthetized copy constructor
+                       // is a good choice?
+                       //=> no because the changes of a vector also change the other vector
+
+  //copy by value each element => point the same memory location (SHALLOW COPY)
+  //we don't want to copy the value of pointers
+  //we want to copy elements (DEEP COPY)
 
   std::cout << "v2 after default copy ctor: ";
   for (const auto x : v2)
@@ -71,4 +77,10 @@ int main() {
   std::cout << std::endl;
 
   return 0;
+
+  //there is an error
+  //the descrutcor delete the memory of v2
+  //the descrutcor want to delete memory of v1
+  //but that memory location was already deleted
+
 }
