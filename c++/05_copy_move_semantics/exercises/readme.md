@@ -3,6 +3,8 @@
 ## Linked list
 Implement a linked list with the following design. You are free to add more functions.
 
+Lecture 08/11/2021 for solution (try to do it by yourself)
+
 ```c++
 enum class Insertion_method { push_back, push_front };
 
@@ -75,19 +77,18 @@ class List {
       Foo(); // default ctor
       Foo(const Foo& f); // copy ctor
       Foo(Foo&& f); // move ctor
-      
+
       Foo& operator=(const Foo& f); // copy assignment
       Foo& operator=(Foo&& f); // move assignment
     };
     ```
 
-    
+
 
 You are required to use blocks of memory (*heap*) locations which are linked together. Each of these blocks contains one component that may refer to another block. If each block (except the final one) contains a pointer to the next block, so that they form a chain, then the entire collection of linked blocks is called a **linked list**. The blocks of memory locations of a linked list are usually called *nodes*.
 
 Each node of a linked list, except the final one, points to its immediate *successor*, and each node except the first one is pointed to by its immediate *predecessor*. The pointer member of the last node has the value `nullptr`.
 
-The private member `head` points to the first element of the list. 
+The private member `head` points to the first element of the list.
 
 ![linked_list.png](./.aux/list2.png)
-
