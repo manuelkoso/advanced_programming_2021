@@ -213,7 +213,7 @@ When we execute a program, the program and the variables that we created will li
 - heap
 - stack
 
-Each function that we run, lived in a different stack frame. The variables of each functions lived in the stack frame of their function. There is no connection between local variables of different functions. When the function execution is over the stack frame of the function is deleted. Therefore the prevous function is called buggy_swap, we worked with the values (accessing by value). We have to consider the address of the variables (accessing by reference).
+Each function that we run, lived in a different stack frame. The variables of each functions lived in the stack frame of their function. There is no connection between local variables of different functions. When the function execution is over the stack frame of the function is deleted. Therefore the prevous function is called buggy_swap, we worked with the values (passed by value). We have to consider the address of the variables (passed by reference).
 
 ```c++
 void swap_c(int* a, int* b) {
