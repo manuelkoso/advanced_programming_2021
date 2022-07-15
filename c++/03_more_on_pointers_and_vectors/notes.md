@@ -208,16 +208,22 @@ We can define matrices as follows
 ```c++
 int ma[6][5];  // matrix: 6 rows, 5 columns each
 
+// initialization
 for (int i = 0; i < 6; ++i)
     for (int j = 0; j < 5; ++j)
         ma[i][j] = 10 * i + j;
 
+// printing
 for (int i = 0; i < 6; ++i) {
     for (int j = 0; j < 5; ++j)
         std::cout << std::setw(3) << ma[i][j];
     std::cout << std::endl;
 }
+```
+The matrices are stored in memory as follows: the elements of the same row are consecutive. We can consider the matrix in C++ like a one long array (the last cell of the first row continuos to the first cell of the second row).  
 
+```c++
+// printing addresses
 for (int i = 0; i < 6; ++i) {
     for (int j = 0; j < 5; ++j)
         std::cout << &ma[i][j] << " ";
@@ -225,3 +231,169 @@ for (int i = 0; i < 6; ++i) {
 }
 ```
 
+How can we pass a matrix to a function? (It's trickier than a simple array)
+```c++
+void print_ma(int m[][5], int dim1);  // ugly and not flexible 
+
+// second dimension must be knwon at compile time
+// void print_ma(int m[][], int dim1, int dim2);  //error 
+
+void print_ma(int* p, int row, int col);  // the "best" solution
+```
+Function print_ma definition
+
+```c++
+void print_ma(int* p, int row, int col) {
+  for (int i = 0; i < row; ++i) {
+    for (int j = 0; j < col; ++j)
+      std::cout << std::setw(2) << p[i * col + j] << " ";
+    std::cout << std::endl;
+  }
+}
+```
+Use of the function print_ma by using reinterpret_cast.
+
+```c++
+// int* pma{ma};     // error
+// int* pma[5]{ma};  // error
+int* p{reinterpret_cast<int*>(ma)};
+// int* p{&ma[0][0]};
+
+// print_ma(ma, 6, 5);  // error
+print_ma(p, 6, 5);
+```
+
+Define dynamic matrixes
+
+```c++
+auto d_ma = new int[6 * 5]{};   //6*5 elements
+print_ma(d_ma, 6, 5);
+delete[] d_ma;
+```
+
+## No built-in arrays (std::array and std::vector)
+
+Static array std::array
+```c++
+#include <array>
+```
+
+Initialization of a static array.
+```c++
+std::array<int, 4> a{1, 2, 3, 4}; //int = type, 4 is the size
+```
+
+We can create an array from another array (the type and the number of elements must be the same)
+```c++
+std::array<int, 4> b{a}; 
+```
+
+Unlike built-in array, where we have to do a for loop to copy an array. We can also do as follows
+
+```c++
+b = a;
+```
+
+Since C++-11 there is a new type of for loop to go over a container. (range-based fir loops)
+```c++
+for (auto x : a)
+    std::cout << x << " ";
+  std::cout << std::endl;
+```
+
+Or with the classic way (note the a.size())
+```c++
+for (auto i = 0u; i < a.size(); ++i)
+    std::cout << "a[" << i << "] = " << a[i] << std::endl;
+```
+
+Accessing a cell of an array
+```c++
+a[0] = 0;  // without bound checking
+b.at(90);  // bound checking at run-time
+```
+We have two ways to pass the custom static array to a function.
+
+```c++
+// two template
+template <typename T, std::size_t N>
+void print_array_two(const std::array<T, N>& a);
+
+// one template
+template <typename T>
+void print_array_one(const T& a);
+```
+There is a const before the argument, because we have to print and we don't want that the array changes. Morover the compiler will better optimize our code and the program will be faster. 
+
+Implementation of the above functions
+
+```c++
+template <typename T, std::size_t N>
+void print_array_two(const std::array<T, N>& a) {
+  for (const auto& x : a)
+    std::cout << x << " ";
+  std::cout << std::endl;
+}
+
+template <typename T>
+void print_array_one(const T& a) {
+  for (const auto& x : a)
+    std::cout << x << " ";
+  std::cout << std::endl;
+}
+```
+NOTE: If we don't use a specific function that we define it, the compiler will ignore it, there will be no effect in runtime.
+
+Example of using
+```c++
+std::array<int, 4> a{1, 2, 3, 4};
+print_array_one(a);
+print_array_two(a);
+```
+
+Dynamic with std::vector
+
+```c++
+#include <vector>
+```
+
+Initialization of dynamic array with std::vector. (two ways)
+
+```c++
+std::vector<int> v0{1, 2, 4};   // 3 elements
+std::vector<int> v1(4, 4);      // 4 elements, each element initialized with 4
+```
+We can easly copy an array
+```c++
+v1 = v0; // now v1 has three elements
+```
+
+Loop over vector. In the example below we want to add elements to the back of the vector.
+```c++
+for (auto x : {7, 8, 9})    // {7, 8, 9} is a list
+    v1.push_back(x);    
+```
+
+We can loop with the classic style intead
+```c++
+for (auto i = 0u; i < v1.size(); ++i)
+    std::cout << "v[" << i << "] = " << v1[i] << std::endl;
+```
+
+Accessing the vector
+```c++
+v1[3];  // not bound checking
+v1.at(67);  // bound checking
+```
+
+Example of print function 
+
+```c++
+template <typename T>
+void print_vector(const std::vector<T>& v, const std::string& s) {
+  std::cout << s << ": ";
+  for (const auto& x : v)
+    std::cout << x << " ";
+  std::cout << std::endl;
+}
+```
