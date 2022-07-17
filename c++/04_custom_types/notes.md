@@ -364,6 +364,9 @@ The operator overloading doesn't work with the pointers.
 
 ## Multiple flags
 
+See file 07_multiple_flags (enum, operator overloading, bit operations)
+
+
 ## Constructors and destructors
 
 The behaviour of the constructors and destructors in class is the same of the struct. The destructor is the function when the object goes out of scope.
@@ -448,3 +451,99 @@ The default value of members when we are using the default constructor depends o
 
 ## Template class
 
+We can also use template when we are defining a class. It follows an example of a vector class.
+
+```c++
+template <typename T>
+class Vector {
+  T* elem;  // pointer to the actual array
+  std::size_t _size;
+
+  public: // interface of our class
+    Vector(const std::size_t size) : elem{new T[size]}, _size{size} {}
+
+    // automatically release the acquired memory
+    ~Vector() { delete[] elem; }
+
+    // try to remove the const and recompile
+    std::size_t size() const { return _size; }  // only read, we cannot modify the status
+
+    T& operator[](const std::size_t i) {  // we can modify the array   
+      return elem[i];
+    }
+
+    const T& operator[](const std::size_t i) const {  // only read
+      return elem[i]; 
+    }
+};  
+```
+
+The desructor release the memory of the dynamic array initialized in the constructor. The function size has a const between () and {, because has only to read the value of the member, not to modify it. When we have to define a "read" function it is reccomended to put the const.  
+
+How can we know if we invoke the first operator [] or the second?
+
+```c++
+Vector<double> v {10};  // 10 is the size
+for(auto i = 0u; i < v.size(); ++i) {
+  v[i] = 3;    // here we invoke the operator without const, the vector is not const
+}
+```
+```c++
+const Vector<double> v {10};  // 10 is the size
+std::cout << v[3] << std::endl;   // here is invoked the operator with const
+```
+
+For example if we consider the following operator overloading
+```c++
+template <typename T>
+std::ostream& operator<<(std::ostream& os, const Vector<T>& v) {
+  for (auto i = 0u; i < v.size(); ++i)
+    os << "v[" << i << "] = " << v[i] << std::endl;
+  return os;
+}
+```
+
+With the `const Vector<T>& v` the compiler can only invoke function marked with const (between `)` and `{` ). 
+
+How can the compiler check if the body of a const function is correct? Mark (implicity) the members with const (for the pointers: the pointer is const not the pointed variable)
+```c++
+T* const elem;
+const std::size_t _size;
+
+std::size_t size() const { 
+  elem[0] = 89; // is legit
+  return _size; 
+}
+``` 
+
+Example of using the Vector class in the main
+```c++
+int main() {
+
+  Vector<double> v{10};
+  std::cout << v[1] << '\n';
+
+  for (auto i = 0u; i < v.size(); ++i)
+    v[i] = i;
+
+  std::cout << v << std::endl;
+
+  Vector<double>* pv{&v};
+
+  // first dereference the pointer, then I can use the defined operators
+  (*pv)[0] = -99.999;
+
+  pv->operator[](1) = 77777.3333;  // or I call the function by name
+
+  std::cout << *pv << std::endl;
+
+  Vector<double>& rv{v};
+
+  rv[5] = 555;
+
+  std::cout << v << std::endl;
+
+  return 0;
+}
+
+```
