@@ -137,7 +137,7 @@ Vector<T>& Vector<T>::operator=(const Vector& v) {
 }
 
 template <typename T>
-// why we return by value?
+// why we return by value? => we cannot return by reference because res leaves in the stack of the function
 Vector<T> operator+(const Vector<T>& lhs, const Vector<T>& rhs) {
   const auto size = lhs.size();
 
