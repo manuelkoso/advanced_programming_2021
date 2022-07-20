@@ -3,6 +3,8 @@
 #include <iostream>
 #include <memory>
 
+// WATCH lecture 13 
+
 #ifndef NDEBUG
 #  define AP_NOEXCEPT
 #else

@@ -122,6 +122,63 @@ double square_root(const double d) {
 }
 ```
 
+But more better is to define a method what (is a C++ convention), see the code below.
+```c++
+struct Square_root_invalid {
+  std::string message;
+  Square_root_invalid(std::string s) : message{std::move(s)} {}
+  const char* what() const { return message.c_str(); }
+};
+
+int main() {
+  try {
+    std::cout << "please insert a number\n";
+    double number;
+    std::cin >> number;
+    double d = square_root(number);
+    std::cout << "square root of " << number << " is " << d << '\n';
+    return 0;
+  } catch (const Square_root_invalid& e) {
+    std::cerr << e.what() << std::endl;
+    return 2;
+  } catch (const std::exception& e) {
+    std::cerr << e.what() << std::endl;
+    return 1;
+  } catch (...) {
+    std::cerr << "Unknown exception. Aborting.\n";
+    return 3;
+  }
+}
+```
+
+If we want to see where, in which function and so more info we have to implement a macro (not a function because we will get the line of this function)
+
+```c++
+double square_root(const double d) {
+  // test the pre-conditions
+
+  AP_ERROR(d >= 0 && d <= 50, Square_root_invalid)
+      << "In our library the argument must be positive and less or equal than "
+         "50.\n\nYou passed "
+      << d << ".\n";
+
+  // AP_ERROR(d >= 0 && d <= 50) << "In our library the argument must be
+  // positive "
+  //                                "and less or equal than 50.\n";
+
+  // AP_ERROR_GE(d, 0) << "Cannot handle negative numbers.\n";
+
+  // AP_ERROR_LE(d, 50) << "According to the implemented algorithm, the argument
+  // "
+  //                       "must be less than 50.\n";
+
+  // AP_ERROR_IN_RANGE(d,0,50);
+
+  return sqrt(d);
+}
+```
+
+
 ## Assert
 
 The assertions (and checks) are performed only when the code is compiled without the -DNDEBUG flag.  Assertions are never enough. Put as many assertions as you can without any worry for loss of performance (in release).
@@ -157,7 +214,7 @@ class ManyResources {
 
 ```
 
-The reccomendetion is to use smart pointers like unique pointers. 
+The reccomendation is to use smart pointers like unique pointers. 
 
 If we are sure that a function doesn't throw an exeption we can put the keyword `noexcept`. If this keyword is present the compiler will create a faster code. 
 
