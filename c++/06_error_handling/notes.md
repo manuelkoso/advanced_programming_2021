@@ -122,7 +122,7 @@ double square_root(const double d) {
 }
 ```
 
-But more better is to define a method what (is a C++ convention), see the code below.
+But is better to define a method what (is a C++ convention), see the code below.
 ```c++
 struct Square_root_invalid {
   std::string message;
