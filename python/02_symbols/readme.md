@@ -1,6 +1,8 @@
 ## Symbols
 
 ## Contents
+- string formatting (prevous year, to check)
+- modules and packages (prevous year, to check)
 - copy and deepcopy
 - local, global, nonlocal variables
 - classes
