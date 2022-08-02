@@ -1,0 +1,12 @@
+/home/koso/Development/advanced_programming_2021/c++/04_custom_types/exercises/date/cmake-build-debug/CMakeFiles/date.dir
+/home/koso/Development/advanced_programming_2021/c++/04_custom_types/exercises/date/cmake-build-debug/CMakeFiles/test.dir
+/home/koso/Development/advanced_programming_2021/c++/04_custom_types/exercises/date/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/koso/Development/advanced_programming_2021/c++/04_custom_types/exercises/date/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/koso/Development/advanced_programming_2021/c++/04_custom_types/exercises/date/cmake-build-debug/src/CMakeFiles/Date.dir
+/home/koso/Development/advanced_programming_2021/c++/04_custom_types/exercises/date/cmake-build-debug/src/CMakeFiles/test.dir
+/home/koso/Development/advanced_programming_2021/c++/04_custom_types/exercises/date/cmake-build-debug/src/CMakeFiles/edit_cache.dir
+/home/koso/Development/advanced_programming_2021/c++/04_custom_types/exercises/date/cmake-build-debug/src/CMakeFiles/rebuild_cache.dir
+/home/koso/Development/advanced_programming_2021/c++/04_custom_types/exercises/date/cmake-build-debug/test/CMakeFiles/TestDate.dir
+/home/koso/Development/advanced_programming_2021/c++/04_custom_types/exercises/date/cmake-build-debug/test/CMakeFiles/test.dir
+/home/koso/Development/advanced_programming_2021/c++/04_custom_types/exercises/date/cmake-build-debug/test/CMakeFiles/edit_cache.dir
+/home/koso/Development/advanced_programming_2021/c++/04_custom_types/exercises/date/cmake-build-debug/test/CMakeFiles/rebuild_cache.dir

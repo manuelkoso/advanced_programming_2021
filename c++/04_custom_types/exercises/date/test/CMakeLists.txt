@@ -1,0 +1,1 @@
+add_executable(TestDate test.cpp ../src/date.cpp ../src/helper_functions.cpp)
