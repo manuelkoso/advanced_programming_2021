@@ -240,6 +240,12 @@ build test/CMakeFiles/TestDate.dir/__/src/helper_functions.cpp.o: CXX_COMPILER__
   OBJECT_DIR = test/CMakeFiles/TestDate.dir
   OBJECT_FILE_DIR = test/CMakeFiles/TestDate.dir/__/src
 
+build test/CMakeFiles/TestDate.dir/__/src/invalid_date.cpp.o: CXX_COMPILER__TestDate_Debug /home/koso/Development/advanced_programming_2021/c++/04_custom_types/exercises/date/src/invalid_date.cpp || cmake_object_order_depends_target_TestDate
+  DEP_FILE = test/CMakeFiles/TestDate.dir/__/src/invalid_date.cpp.o.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = test/CMakeFiles/TestDate.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/TestDate.dir/__/src
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target TestDate
@@ -248,7 +254,7 @@ build test/CMakeFiles/TestDate.dir/__/src/helper_functions.cpp.o: CXX_COMPILER__
 #############################################
 # Link the executable test/TestDate
 
-build test/TestDate: CXX_EXECUTABLE_LINKER__TestDate_Debug test/CMakeFiles/TestDate.dir/test.cpp.o test/CMakeFiles/TestDate.dir/__/src/date.cpp.o test/CMakeFiles/TestDate.dir/__/src/helper_functions.cpp.o
+build test/TestDate: CXX_EXECUTABLE_LINKER__TestDate_Debug test/CMakeFiles/TestDate.dir/test.cpp.o test/CMakeFiles/TestDate.dir/__/src/date.cpp.o test/CMakeFiles/TestDate.dir/__/src/helper_functions.cpp.o test/CMakeFiles/TestDate.dir/__/src/invalid_date.cpp.o
   FLAGS = -g
   OBJECT_DIR = test/CMakeFiles/TestDate.dir
   POST_BUILD = :

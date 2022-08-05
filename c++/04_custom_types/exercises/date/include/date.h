@@ -5,6 +5,8 @@
 #ifndef DATE_DATE_H
 #define DATE_DATE_H
 
+#include <string>
+
 enum class month_enum {
     jan = 1, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec
 };
@@ -15,9 +17,21 @@ class Date {
     month_enum _m;
     unsigned int _y;
 
+    bool isDateValid();
+    bool isDayValid();
+    bool isMonthValid();
+    bool isYearValid();
+
 public:
 
-    class InvalidDate;
+    class InvalidDate {
+        std::string _message;
+    public:
+        InvalidDate(std::string message);
+
+        const char* what() const;
+
+    };
 
     Date(unsigned short day, enum month_enum month, unsigned int year);
 

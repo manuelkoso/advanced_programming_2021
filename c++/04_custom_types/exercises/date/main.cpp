@@ -10,6 +10,6 @@ int main(int argc, char *argv[]) {
         std::cout << "Date" << " version: " << date_VERSION_MAJOR << "."
                   << date_VERSION_MINOR << " " << std::endl;
     }
-    Date d {1 , static_cast<month_enum>(2), 2389};
+    Date d {0 , static_cast<month_enum>(2), 2389};
     return 0;
 }

@@ -5,13 +5,11 @@
 #include <string>
 #include "../include/date.h"
 
-class Date::InvalidDate {
-    std::string _message;
+Date::InvalidDate::InvalidDate(std::string message): _message{message} {};
 
-    InvalidDate(std::string message) : _message{message} {};
+const char *Date::InvalidDate::what() const {
+    return _message.c_str();
+}
 
-    const char* what() const {
-        return _message.c_str();
-    }
 
-};
+
